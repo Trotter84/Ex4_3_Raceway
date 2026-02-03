@@ -6,7 +6,7 @@ public class Sedan extends Car {
 	private int dadModeCounter = 3;
 
 	public Sedan(String name) {
-		super(name, "\uD83D\uDE97", 1, CarColor.CYAN, ProblemChance.MEDIUM);
+		super(name, "\uD83D\uDE97", BASE_CAR_SPEED, CarColor.CYAN, ProblemChance.MEDIUM);
 		setProblemChance(DEFAULT_PROBLEM_CHANCE);
 	}
 
@@ -20,7 +20,7 @@ public class Sedan extends Car {
 			SpeedState state = SpeedState.NORMAL;
 			int speed = getSpeed();
 
-//			SPECIAL FUNCTION
+//	SPECIAL FUNCTION
 			if (dadModeCounter > 0) {
 				float dadMode = RANDOM.nextFloat();
 				if (dadMode <= CHANCE_TO_DAD_MODE) {
@@ -30,9 +30,19 @@ public class Sedan extends Car {
 					setProblemChance(ProblemChance.HIGH);
 				}
 			}
-//			END SPECIAL FUNCTION
-
+//	END SPECIAL FUNCTION
 			super.addToTrack(state, speed);
+			updateDistanceTravelled(speed);
+
+		} else if (getCarState() == CarState.SLOWED) {
+			SpeedState state = SpeedState.SLOW;
+			setSlowCount(getSlowCount() - 1);
+			if (getSlowCount() == 0) {
+				state = SpeedState.NORMAL;
+				setCarState(CarState.NORMAL);
+			}
+			int speed = getSpeed();
+			super.addToTrack(state, speed / 2);
 			updateDistanceTravelled(speed);
 		}
 	}

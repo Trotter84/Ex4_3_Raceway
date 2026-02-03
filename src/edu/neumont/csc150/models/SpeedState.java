@@ -6,4 +6,5 @@ public enum SpeedState {
 	ACCELERATED,
 	DAD_MODE,
 	TIME_TRAVEL,
+	FLOOR_IT,
 }

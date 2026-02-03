@@ -5,12 +5,14 @@ import java.util.Random;
 
 
 public abstract class Car {
+	protected static final int BASE_CAR_SPEED = 2;
 	protected static final Random RANDOM = new Random();
 	private String name;
 	private String symbol;
 	private CarColor color;
 	private int speed;
 	private int distanceTravelled;
+	private int slowCount = 3;
 	private CarState carState;
 	private ProblemChance problemChance;
 	private ArrayList<SpeedState> carTrack = new ArrayList<>();
@@ -79,11 +81,19 @@ public abstract class Car {
 		this.distanceTravelled = distanceTravelled;
 	}
 
+	protected int getSlowCount() {
+		return slowCount;
+	}
+
+	protected void setSlowCount(int slowCount) {
+		this.slowCount = slowCount;
+	}
+
 	public CarState getCarState() {
 		return carState;
 	}
 
-	private void setCarState(CarState carState) {
+	protected void setCarState(CarState carState) {
 		if (carState == null) {
 			carState = CarState.NORMAL;
 		}
@@ -148,6 +158,11 @@ public abstract class Car {
 	}
 
 	public abstract void moveCar(int raceDistance);
+
+	public void slow() {
+		setCarState(CarState.SLOWED);
+		setSlowCount(3);
+	}
 
 	@Override
 	public String toString() {

@@ -42,6 +42,9 @@ public class SpeedwayUI {
 				case TIME_TRAVEL:
 					Console.write("T", Console.TextColor.PURPLE);
 					break;
+				case FLOOR_IT:
+					Console.write("F", Console.TextColor.BLUE);
+					break;
 				default: // NORMAL:
 					Console.write("-", Console.TextColor.WHITE);
 					break;
@@ -50,6 +53,7 @@ public class SpeedwayUI {
 		Console.TextColor carColor = CarHelpers.getCarTextColor(car);
 		switch (car.getCarState()) {
 			case FLAT_TIRE -> Console.writeln(String.valueOf((char)892), Console.TextColor.RED);
+			case ENGINE_BLOWN -> Console.writeln("\uD83D\uDCA5", Console.TextColor.RED);
 			default -> Console.writeln(car.getSymbol(), carColor);
 		}
 	}
@@ -59,7 +63,8 @@ public class SpeedwayUI {
 		Console.writeln("");
 		Console.writeln("WINNER AFTER " + raceDuration + " IS ", Console.TextColor.GREEN);
 		if (winner != null) {
-			Console.writeln(winner.toString(), CarHelpers.getCarTextColor(winner));
+			Console.write(winner.getSymbol(), CarHelpers.getCarTextColor(winner));
+			Console.writeTyping(winner.toString(), 100, CarHelpers.getCarTextColor(winner));
 		} else {
 			Console.writeln("No one!", Console.TextColor.PURPLE);
 		}
@@ -89,5 +94,9 @@ public class SpeedwayUI {
 			Console.writeln("No cars had issues! YAY :)", Console.TextColor.CYAN);
 		}
 		Console.writeRainbow("********** RACE OVER **********");
+	}
+
+	public static void clear() {
+		Console.clear(25);
 	}
 }

@@ -8,7 +8,7 @@ public class Sleeper extends Car {
 	}
 
 	public Sleeper(String name, float chanceToGoFaster) {
-		super(name, "\uD83D\uDECC", 1, CarColor.PURPLE, ProblemChance.HIGH);
+		super(name, "\uD83D\uDECC", BASE_CAR_SPEED, CarColor.PURPLE, ProblemChance.HIGH);
 		this.CHANCE_TO_GO_FASTER = chanceToGoFaster;
 	}
 
@@ -16,7 +16,7 @@ public class Sleeper extends Car {
 	public void moveCar(int raceDistance) {
 		checkForProblems();
 		if (getCarState() == CarState.NORMAL) {
-			SpeedState speedState = SpeedState.NORMAL;
+			SpeedState state = SpeedState.NORMAL;
 			int speed = getSpeed();
 
 //			SPECIAL FEATURE
@@ -24,12 +24,23 @@ public class Sleeper extends Car {
 				float moveFaster = RANDOM.nextFloat();
 				if (moveFaster <= CHANCE_TO_GO_FASTER) {
 					speed += 1;
-					speedState = SpeedState.ACCELERATED;
+					state = SpeedState.ACCELERATED;
 				}
 			}
 //			END SPECIAL FEATURE
 
-			addToTrack(speedState, speed);
+			super.addToTrack(state, speed);
+			updateDistanceTravelled(speed);
+
+		} else if (getCarState() == CarState.SLOWED) {
+			SpeedState state = SpeedState.SLOW;
+			setSlowCount(getSlowCount() - 1);
+			if (getSlowCount() == 0) {
+				state = SpeedState.NORMAL;
+				setCarState(CarState.NORMAL);
+			}
+			int speed = getSpeed();
+			super.addToTrack(state, speed / 2);
 			updateDistanceTravelled(speed);
 		}
 	}

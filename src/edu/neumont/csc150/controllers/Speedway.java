@@ -21,6 +21,7 @@ public class Speedway {
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
 		scheduler.scheduleAtFixedRate(() -> {
+										  SpeedwayUI.clear();
 										  race1.moveAllCars();
 										  SpeedwayUI.showCars(race1.getCars(), race1.getRaceDistance(), race1.getLiveRaceDuration());
 										  if (race1.isOver()) {
@@ -43,11 +44,18 @@ public class Speedway {
 	}
 
 	private void addCars() {
-		Sedan dad = new Sedan("Daniel");
-		race1.addCarToRace(dad);
+		Sedan dad1 = new Sedan("Daniel");
+		Sedan dad2 = new Sedan("Dad");
 		Sleeper honda = new Sleeper("Honda");
-		race1.addCarToRace(honda);
+		F1 f1 = new F1("Mclaren");
 		Delorean marty = new Delorean("McFly");
+		Mario mario = new Mario("Mario", dad1, honda);
+
+		race1.addCarToRace(f1);
+		race1.addCarToRace(dad1);
+		race1.addCarToRace(mario);
+		race1.addCarToRace(honda);
+		race1.addCarToRace(dad2);
 		race1.addCarToRace(marty);
 	}
 }

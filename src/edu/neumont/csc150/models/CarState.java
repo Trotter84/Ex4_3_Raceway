@@ -3,6 +3,7 @@ package edu.neumont.csc150.models;
 public enum CarState {
 	NORMAL("Normal"),
 	FLAT_TIRE("Flat tire"),
+	SLOWED("Slowed"),
 	ENGINE_BLOWN("Engine blown");
 
 	private final String FRIENDLY_NAME;
