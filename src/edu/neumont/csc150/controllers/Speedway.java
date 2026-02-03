@@ -18,22 +18,28 @@ public class Speedway {
 	}
 
 	public void race() {
-		try (ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1)) {
-			scheduler.scheduleAtFixedRate(() -> {
-											  race1.moveAllCars();
-											  SpeedwayUI.showCars(race1.getCars(), race1.getRaceDistance(), race1.getLiveRaceDuration());
-											  if (race1.isOver()) {
-												  race1.endRace();
-												  scheduler.shutdown();
-//												  SpeedwayUI.showRaceOver();
-											  }
-										  }, 1L, 1L, TimeUnit.SECONDS
-			);
-			race1.startRace();
-			while (race1.getRaceIsOn()) {
+		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-			}
+		scheduler.scheduleAtFixedRate(() -> {
+										  race1.moveAllCars();
+										  SpeedwayUI.showCars(race1.getCars(), race1.getRaceDistance(), race1.getLiveRaceDuration());
+										  if (race1.isOver()) {
+											  race1.endRace();
+											  scheduler.shutdown();
+										  }
+									  }, 1L, 1L, TimeUnit.SECONDS
+		);
+
+		race1.startRace();
+
+		try {
+			scheduler.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
 		}
+
+		SpeedwayUI.showRaceOver(race1.getEndRaceDuration(), race1.getWinner(), race1.getCars());
+
 	}
 
 	private void addCars() {
