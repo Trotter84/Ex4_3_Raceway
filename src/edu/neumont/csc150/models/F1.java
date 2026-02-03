@@ -32,14 +32,14 @@ public class F1 extends Car {
 				float floorIt = RANDOM.nextFloat();
 				if (floorIt <= chanceToFloorIt) {
 					int floorItDuration = RANDOM.nextInt(UPPER_BOUND);
-					System.out.println("Floor It Duration: " + floorItDuration);
+//					System.out.println("Floor It Duration: " + floorItDuration);
 					overHeatLevel += floorItDuration;
-					System.out.println("Heat Level: " + overHeatLevel);
+//					System.out.println("Heat Level: " + overHeatLevel);
 					speed += floorItDuration;
 					state = SpeedState.FLOOR_IT;
 					setProblemChance(ProblemChance.HIGH);
 					chanceToFloorIt -= (float)floorItDuration / 100;
-					System.out.println("Chance To Floor It: " + chanceToFloorIt);
+//					System.out.println("Chance To Floor It: " + chanceToFloorIt);
 				}
 			} else {
 				setCarState(CarState.ENGINE_BLOWN);

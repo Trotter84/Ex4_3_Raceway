@@ -48,14 +48,18 @@ public class Speedway {
 		Sedan dad2 = new Sedan("Dad");
 		Sleeper honda = new Sleeper("Honda");
 		F1 f1 = new F1("Mclaren");
+		F1 f2 = new F1("Neralcm");
 		Delorean marty = new Delorean("McFly");
-		Mario mario = new Mario("Mario", dad1, honda);
+		MarioBro mario = new MarioBro("MarioBro", dad1, f1);
+		MarioBro luigi = new MarioBro("Luigi", honda, marty);
 
-		race1.addCarToRace(f1);
 		race1.addCarToRace(dad1);
 		race1.addCarToRace(mario);
+		race1.addCarToRace(f1);
 		race1.addCarToRace(honda);
-		race1.addCarToRace(dad2);
+		race1.addCarToRace(luigi);
 		race1.addCarToRace(marty);
+		race1.addCarToRace(f2);
+		race1.addCarToRace(dad2);
 	}
 }

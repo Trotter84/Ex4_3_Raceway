@@ -1,9 +1,9 @@
 package edu.neumont.csc150.models;
 
-public class Mario extends AttackerCar {
+public class MarioBro extends AttackerCar {
 	private float CHANCE_FOR_BANANA = 0.075f;
 
-	public Mario(String name, Car topCar, Car bottomCar) {
+	public MarioBro(String name, Car topCar, Car bottomCar) {
 		super(name, "\uD83C\uDF44", BASE_CAR_SPEED, CarColor.CYAN, ProblemChance.LOW, topCar, bottomCar);
 		setTopCar(topCar);
 		setBottomCar(bottomCar);
