@@ -23,7 +23,7 @@ public abstract class AttackerCar extends Car {
 	}
 
 	protected Car getBottomCar() {
-		return topCar;
+		return bottomCar;
 	}
 
 	public void setBottomCar(Car bottomCar) {
